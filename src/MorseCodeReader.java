@@ -1,13 +1,13 @@
+//Saker som jag lagt till/tolkat i kraven:
+//Jag vill översätta mellanslag på korrekt åt båda hållen (tre mellanslag mellan ord i morse-kod).
+//Jag vill att specialtecken och tecken utanför det engelska alfabetet ska översättas med ett frågetecken,
+//så att användaren lätt ska kunna se vilket tecken som inte gick att översätta.
+//Ovannämnda lösning gör också att eventuella felinmatningar undviks, vilket gör programmet mer resilient.
+//Tomma rader ska ge ett felmeddelande om att raden är tom (ännu inte löst)?
+//Ogiltigt menyval ska ge ett felmeddelande.
+
 import java.util.HashMap;
-// Skriv ett program som gör om morsekod till engelska
-//och engelska till morsekod
-//❖ Skriv programmet med minst en logikklass samt en
-//klass som läser in text och skriver ut text (med en
-//main-metod). Utveckla programmet i TDD och skriv
-//minst 5 JUnit-testfall
-//❖ Logik-klass
-//❖ Main-klass
-//❖ Test-klass
+
 public class MorseCodeReader {
 
     private static HashMap<String, Character> morseToLetter = new HashMap<>();
@@ -30,6 +30,9 @@ public class MorseCodeReader {
 
 
     public String morseToEnglish(String input){
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         //Jag behövde en räknare som håller redan på mellanslagen, så att jag kan få en korrekt utskrift av mellanslag i översättningen.
         int spaceCount = 0;
         //Efter att ha läst på om StringBuilder, så valde jag att jobba med det istället för String.
@@ -57,6 +60,9 @@ public class MorseCodeReader {
 
     public String englishToMorse(String input){
         //String inputNoSpecialChar = removeSpecialChar(input.toUpperCase());
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         String [] words = input.toUpperCase().trim().split(" ");
         StringBuilder result = new StringBuilder();
         for (String word : words) {
@@ -65,7 +71,7 @@ public class MorseCodeReader {
             }
             char [] letters = word.toCharArray();
             for (char c : letters) {
-                result.append(letterToMorse.getOrDefault(c, "?") + " ");
+                result.append(letterToMorse.getOrDefault(c, "?")).append(" ");
             } result.append("  ");
         } return result.toString().trim();
     }

@@ -15,24 +15,44 @@ public class MorseCodeReaderMain {
                     "\n2. Translate Morse to English" +
                     "\n3. Print out the Morse alphabet" +
                     "\n4. Quit program");
-            int choice = Integer.parseInt(scan.nextLine());
+            try {
+                int choice = Integer.parseInt(scan.nextLine());
 
-            switch (choice) {
-                case 1:
-                    System.out.println("Write the text you want to translate to morse. (Only English letters!)");
-                    System.out.println(myText.englishToMorse(scan.nextLine()));
-                    break;
-                case 2:
-                    System.out.println("Write the morse code message you want to translate to English!");
-                    System.out.println(myText.morseToEnglish(scan.nextLine()));
-                    break;
-                case 3:
-                    myText.getMorseAlphabet();
-                    break;
-                case 4:
-                    System.out.println("Program closes down");
-                    isRunning = false;
-                    break;
+                switch (choice) {
+                    case 1:
+                        System.out.println("Write the text you want to translate to morse. (Only English letters!)");
+                        while (true) {
+                            try {
+                                System.out.println(myText.englishToMorse(scan.nextLine()));
+                                break;
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Empty String, please try again!");
+                            }
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Write the morse code message you want to translate to English!");
+                        while (true) {
+                            try {
+                                System.out.println(myText.morseToEnglish(scan.nextLine()));
+                                break;
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Empty String, please try again!");
+                            }
+                        }
+
+                        break;
+                    case 3:
+                        myText.getMorseAlphabet();
+                        break;
+                    case 4:
+                        System.out.println("Program closes down");
+                        isRunning = false;
+                        break;
+
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Ogiltigt val, välj en siffra mellan 1 och 4!");
             }
         }
     }
