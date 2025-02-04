@@ -34,4 +34,17 @@ public class MorseCodeReaderTest {
         MorseCodeReader newReader = new MorseCodeReader();
         assertEquals(".... . .---   .... . .---", newReader.englishToMorse("hej hej"));
     }
+
+    @Test
+    void testManySpacesEnglishToMorse() {
+        MorseCodeReader newReader = new MorseCodeReader();
+        assertEquals("", newReader.englishToMorse("     "));
+    }
+
+    @Test
+    void testOnlySpacesMorseToEnglish() {
+        MorseCodeReader newReader = new MorseCodeReader();
+        assertEquals("", newReader.morseToEnglish("       "));
+    }
+
 }
