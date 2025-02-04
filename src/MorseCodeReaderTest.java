@@ -20,7 +20,7 @@ public class MorseCodeReaderTest {
     @Test
     void testEnglishToMorseSpecialChar() {
         MorseCodeReader newReader = new MorseCodeReader();
-        assertEquals("", newReader.englishToMorse("!!!!"));
+        assertEquals("? ? ? ?", newReader.englishToMorse("!!!!"));
     }
 
     @Test
