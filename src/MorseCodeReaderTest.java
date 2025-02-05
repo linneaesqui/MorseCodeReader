@@ -44,7 +44,14 @@ public class MorseCodeReaderTest {
     @Test
     void testOnlySpacesMorseToEnglish() {
         MorseCodeReader newReader = new MorseCodeReader();
-        assertEquals("", newReader.morseToEnglish("       "));
+        assertEquals("", newReader.morseToEnglish("     "));
     }
 
+    @Test
+    void testPrintMorseAlphabet() {
+        MorseCodeReader newReader = new MorseCodeReader();
+        assertEquals("A = .-\nB = -...\nC = -.-.\nD = -..\nE = .\nF = ..-.\nG = --.\nH = ....\nI = .." +
+                "\nJ = .---\nK = -.-\nL = .-..\nM = --\nN = -.\nO = ---\nP = .--.\nQ = --.-\nR = .-.\nS = ..." +
+                "\nT = -\nU = ..-\nV = ...-\nW = .--\nX = -..-\nY = -.--\nZ = --..", newReader.printMorseAlphabet());
+    }
 }
