@@ -10,8 +10,8 @@ import java.util.HashMap;
 
 public class MorseCodeReader {
 
-    private static HashMap<String, Character> morseToLetter = new HashMap<>();
-    private static HashMap<Character, String> letterToMorse = new HashMap<>();
+    private static final HashMap<String, Character> morseToLetter = new HashMap<>();
+    private static final HashMap<Character, String> letterToMorse = new HashMap<>();
 
 //Jag läste mig till att man kan göra ett static{}-block, när man har en kod som ska köras en gång
 //(när klassen skapas).
@@ -19,9 +19,7 @@ public class MorseCodeReader {
 //Praktiskt pga: använder mindre prestanda än kod som ligger i konstruktorn, eftersom denna körs
 //varje gång ett objekt skapas.
     static {
-        //Jag vill splita mellan varje tecken, men vid användning av split(""), blir det en tom plats i början på min Array.
-        //För att undvika detta fann jag ett annat sätt att skriva split.
-        String[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("(?!^)");
+        String[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
         String[] morse = (".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-." +
                 " ... - ..- ...- .-- -..- -.-- --..").split(" ");
         for(int i = 0; i < letters.length; i++) {
@@ -33,7 +31,9 @@ public class MorseCodeReader {
 
 
     public String morseToEnglish(String input){
-        //Om input är tom, kastar vi ett IllegalArgumentException. Detta fångas upp i en try/catch i Main-metoden
+        //Om input är tom, kastar vi ett IllegalArgumentException. Vi trimmar vår String först, för att ta bort alla eventuella mellanslag,
+        //tabs och radbyten. Detta fångas sedan upp i en try/catch i Main-metoden.
+        input = input.trim();
         if (input.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -64,7 +64,7 @@ public class MorseCodeReader {
     }
 
     public String englishToMorse(String input){
-
+        input = input.trim();
         if (input.isEmpty()) {
             throw new IllegalArgumentException();
         }
@@ -85,12 +85,6 @@ public class MorseCodeReader {
         } return result.toString().trim();
     }
 
-//    public String printMorseAlphabet() {
-//        String alphabetToMorse = "";
-//        for (Character key : letterToMorse.keySet()) {
-//            alphabetToMorse = (key + " = " + letterToMorse.get(key));
-//        } return alphabetToMorse;
-//    }
     public String printMorseAlphabet() {
         StringBuilder result = new StringBuilder();
         for (Character key : letterToMorse.keySet()) {

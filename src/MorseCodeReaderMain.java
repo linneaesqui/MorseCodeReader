@@ -21,7 +21,8 @@ public class MorseCodeReaderMain {
                     "\n4. Quit program");
             //Här vill jag fånga upp alla inmatningar som inte är siffror (eftersom siffrorna fångas upp i min default).
             //Därför kastar jag ett NumberFormatException. Även om jag inte kan se att något annat skulle kunna gå fel,
-            //så kastar jag ett allmänt exception.
+            //så kastar jag ett allmänt exception. (Detta skulle kunna vara redundant, jag har ännu inte lyckats hitta
+            //någonting som kastar nåt annat exception än NumberFormat).
             try {
                 int choice = Integer.parseInt(scan.nextLine());
 
@@ -31,7 +32,7 @@ public class MorseCodeReaderMain {
                         while (true) {
                             //Jag valde ett IllegalArgumentException, eftersom att mitt program skriver ut ett frågetecken
                             //för alla tecken som det inte kan översätta. Det enda "fel" min try/catch behöver fånga är
-                            //om strängen är tom.
+                            //om strängen är tom/bara innehåller radbyten/tabs eller mellanslag.
                             try {
                                 System.out.println(myText.englishToMorse(scan.nextLine()));
                                 break;
